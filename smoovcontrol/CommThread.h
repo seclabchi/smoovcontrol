@@ -18,6 +18,8 @@
 
 #include <zmqpp/zmqpp.hpp>
 
+#include "proto/fmsmoov.pb.h"
+
 
 using namespace std;
 
@@ -36,7 +38,8 @@ private:
 	bool& m_commthread_started;
 	bool m_commthread_shutdown_complete;
 	bool m_shutdown_signalled;
-	static constexpr chrono::duration m_loopwait = chrono::milliseconds(50);
+	static constexpr chrono::duration m_loopwait = chrono::milliseconds(5);
+    fmsmoov::ProcessorLiveData* pb_live;
 };
 
 #endif /* COMMTHREAD_H_ */

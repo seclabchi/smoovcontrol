@@ -13,6 +13,9 @@
 #include <condition_variable>
 #include <pthread.h>
 
+#include <zmqpp/context.hpp>
+#include <zmqpp/poller.hpp>
+
 
 CommThread::CommThread(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _commthread_started) :
 	mutex_startup(_mutex_startup), cv_startup(_cv_startup), m_commthread_started(_commthread_started) {
@@ -20,6 +23,7 @@ CommThread::CommThread(std::mutex& _mutex_startup, std::condition_variable& _cv_
 	log = spdlog::stdout_color_mt("COMMTHREAD");
 	log->set_pattern("%^[%H%M%S.%e][%s:%#][%n][%l] %v%$");
 	log->set_level(spdlog::level::trace);
+    pb_live = new fmsmoov::ProcessorLiveData();
 }
 
 CommThread::~CommThread() {
@@ -60,11 +64,28 @@ void CommThread::operator ()(string params) {
 	cv_startup.notify_one();
 
     LOGD("CommThread in main polling loop...waiting for shutdown signal...");
-
-
+    
+    zmqpp::context_t context;
+    zmqpp::socket socket_sub(context, zmqpp::socket_type::subscribe);
+    socket_sub.connect("tcp://rpi-fmsmoov:5555");
+    cout << "Connected to publisher." << endl;
+    //# Initialize poll set
+    socket_sub.subscribe("");
+    zmqpp::poller poller;
+    poller.add(socket_sub, zmqpp::poller::poll_in);
+    
     while(false == m_shutdown_signalled) {
     	LOGD("Comm thread loop...");
-    	usleep(500000);
+        if(poller.poll()) {
+            if(zmqpp::poller::poll_in & poller.events(socket_sub)) {
+                zmqpp::message message;
+                socket_sub.receive(message);
+                string msgstr;
+                message >> msgstr;
+                pb_live->ParseFromString(msgstr);
+                LOGD("Received msg from publisher: inL {} inR {} outL {} outR {}", pb_live->inl(), pb_live->inr(), pb_live->outl(), pb_live->outr());
+            }
+        }
     	cv_shutdown.wait_for(lk, m_loopwait, [&]{return m_shutdown_signalled;});
     }
 
