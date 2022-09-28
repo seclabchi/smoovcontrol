@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D2FAE1128E3EEC700E1A3E1 /* fmsmoov.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FAE0F28E3EEC700E1A3E1 /* fmsmoov.pb.cc */; };
 		9D4B81C628D6395900F2264F /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4B81C428D6395900F2264F /* libfmt.a */; };
 		9D4B81CF28D63A7800F2264F /* CommThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B81C828D63A7700F2264F /* CommThread.cpp */; };
 		9D4B81D028D63A7800F2264F /* StereoMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B81C928D63A7700F2264F /* StereoMeter.cpp */; };
@@ -15,7 +16,6 @@
 		9D4B81D428D64D6500F2264F /* libzmqpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4B81D328D64D6500F2264F /* libzmqpp.a */; };
 		9D4B81D628D64D7B00F2264F /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4B81D528D64D7B00F2264F /* libzmq.a */; };
 		9D4B81DE28D6F0BC00F2264F /* libprotobuf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4B81DD28D6F0BC00F2264F /* libprotobuf.a */; };
-		9D4B81E228D79E0F00F2264F /* fmsmoov.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B81E128D79E0F00F2264F /* fmsmoov.pb.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D2FAE0E28E3EEC700E1A3E1 /* fmsmoov.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmsmoov.pb.h; sourceTree = "<group>"; };
+		9D2FAE0F28E3EEC700E1A3E1 /* fmsmoov.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fmsmoov.pb.cc; sourceTree = "<group>"; };
 		9D4B81AC28D6375000F2264F /* smoovcontrol */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = smoovcontrol; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D4B81C328D6395900F2264F /* libfltk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfltk.a; path = ../../../usr/local/lib/libfltk.a; sourceTree = "<group>"; };
 		9D4B81C428D6395900F2264F /* libfmt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmt.a; path = ../../../usr/local/Cellar/fmt/9.1.0/lib/libfmt.a; sourceTree = "<group>"; };
@@ -46,8 +48,6 @@
 		9D4B81D528D64D7B00F2264F /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = ../../../usr/local/Cellar/zeromq/4.3.4/lib/libzmq.a; sourceTree = "<group>"; };
 		9D4B81D728D65F3A00F2264F /* log_sink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log_sink.h; sourceTree = "<group>"; };
 		9D4B81DD28D6F0BC00F2264F /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf.a; path = ../../../usr/local/lib/libprotobuf.a; sourceTree = "<group>"; };
-		9D4B81E028D77CD500F2264F /* proto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = proto; sourceTree = "<group>"; };
-		9D4B81E128D79E0F00F2264F /* fmsmoov.pb.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fmsmoov.pb.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +65,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D2FAE0C28E3EEC700E1A3E1 /* proto */ = {
+			isa = PBXGroup;
+			children = (
+				9D2FAE0E28E3EEC700E1A3E1 /* fmsmoov.pb.h */,
+				9D2FAE0F28E3EEC700E1A3E1 /* fmsmoov.pb.cc */,
+			);
+			path = proto;
+			sourceTree = "<group>";
+		};
 		9D4B81A328D6375000F2264F = {
 			isa = PBXGroup;
 			children = (
+				9D2FAE0C28E3EEC700E1A3E1 /* proto */,
 				9D4B81AE28D6375000F2264F /* smoovcontrol */,
 				9D4B81AD28D6375000F2264F /* Products */,
 				9D4B81C228D6395900F2264F /* Frameworks */,
@@ -85,9 +95,7 @@
 		9D4B81AE28D6375000F2264F /* smoovcontrol */ = {
 			isa = PBXGroup;
 			children = (
-				9D4B81E028D77CD500F2264F /* proto */,
 				9D4B81CE28D63A7800F2264F /* common_defs.h */,
-				9D4B81E128D79E0F00F2264F /* fmsmoov.pb.cc */,
 				9D4B81C828D63A7700F2264F /* CommThread.cpp */,
 				9D4B81CA28D63A7800F2264F /* CommThread.h */,
 				9D4B81CC28D63A7800F2264F /* MainWindow.cpp */,
@@ -170,8 +178,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D4B81D228D63A7800F2264F /* MainWindow.cpp in Sources */,
-				9D4B81E228D79E0F00F2264F /* fmsmoov.pb.cc in Sources */,
 				9D4B81CF28D63A7800F2264F /* CommThread.cpp in Sources */,
+				9D2FAE1128E3EEC700E1A3E1 /* fmsmoov.pb.cc in Sources */,
 				9D4B81D128D63A7800F2264F /* smoovcontrol.cpp in Sources */,
 				9D4B81D028D63A7800F2264F /* StereoMeter.cpp in Sources */,
 			);
@@ -295,6 +303,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
@@ -315,6 +324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,

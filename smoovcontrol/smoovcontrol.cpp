@@ -12,9 +12,10 @@
 #include <string>
 #include <condition_variable>
 
+#include "common_defs.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
-#include "common_defs.h"
+
 
 #include "log_sink.h"
 #include "spdlog/details/null_mutex.h"
@@ -106,15 +107,13 @@ int main(int argc, char* argv[]) {
     osx_latencycritical_start();
 	std::shared_ptr<spdlog::logger> log;
 	log = spdlog::stdout_color_mt(string("MAIN"), spdlog::color_mode::always);
-    //log = log_sink_mt;
-	log->set_pattern("%^[%H%M%S.%e][%s:%#][%n][%l] %v%$");
+   	log->set_pattern("%^[%H%M%S.%e][%s:%#][%n][%l] %v%$");
 	log->set_level(spdlog::level::trace);
 
 	LOGI("Starting smoovcontrol...");
 
 	MainWindow* mw = new MainWindow();
 
-	bool comm_thread_started = false;
 	std::mutex mutex_startup;
 	std::condition_variable cv_startup;
 	std::unique_lock lk(mutex_startup);
@@ -124,13 +123,19 @@ int main(int argc, char* argv[]) {
 
 	// Start thread for 0mq/protobuf handler
 	std::thread* cmd_thread = new std::thread(std::ref(*comm_thread), "1234");
-	LOGD("Waiting for startup confirmation from ProcessorMain...");
+	LOGD("Waiting for startup confirmation from CommThread...");
 	cv_startup.wait(lk, [&]{return commthread_started;}); // @suppress("Invalid arguments")
 
+    comm_thread->set_main_window(mw);
+    mw->set_comm_thread(comm_thread);
+    
 	LOGI("Starting UI");
 	mw->go(argc, argv);
+    LOGI("UI closed.");
 	comm_thread->stop();
-	LOGI("UI closed.  Goodbye.");
+    LOGD("Stopping comm thread and waiting to join...");
+    cmd_thread->join();
+    LOGI("All shut down.  Goodbye.");
     osx_latencycritical_end();   
 	return 0;
 }

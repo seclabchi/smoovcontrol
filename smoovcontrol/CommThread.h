@@ -18,8 +18,9 @@
 
 #include <zmqpp/zmqpp.hpp>
 
-#include "proto/fmsmoov.pb.h"
+#include "fmsmoov.pb.h"
 
+class MainWindow;
 
 using namespace std;
 
@@ -29,6 +30,8 @@ public:
 	virtual ~CommThread();
 	void operator ()(string params);
 	void stop();
+    void set_main_window(MainWindow* mw);
+    void send_command(const fmsmoov::ProcessorCommand);
 private:
 	std::shared_ptr<spdlog::logger> log;
 	std::mutex mutex_shutdown;
@@ -39,7 +42,8 @@ private:
 	bool m_commthread_shutdown_complete;
 	bool m_shutdown_signalled;
 	static constexpr chrono::duration m_loopwait = chrono::milliseconds(5);
-    fmsmoov::ProcessorLiveData* pb_live;
+    fmsmoov::ProcessorLiveData pb_live;
+    MainWindow* m_main_window;
 };
 
 #endif /* COMMTHREAD_H_ */
