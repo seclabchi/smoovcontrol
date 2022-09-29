@@ -1,7 +1,7 @@
 /*
- * CommThread.h
+ * Subscriber.h
  *
- *  Created on: Jul 30, 2022
+ *  Created on: Sep 27, 2022
  *      Author: zaremba
  */
 
@@ -24,10 +24,10 @@ class MainWindow;
 
 using namespace std;
 
-class CommThread {
+class Subscriber {
 public:
-	CommThread(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _commthread_started);
-	virtual ~CommThread();
+    Subscriber(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _commthread_started);
+	virtual ~Subscriber();
 	void operator ()(string params);
 	void stop();
     void set_main_window(MainWindow* mw);
@@ -38,12 +38,12 @@ private:
 	std::mutex& mutex_startup;
 	std::condition_variable& cv_startup;
 	std::condition_variable cv_shutdown;
-	bool& m_commthread_started;
-	bool m_commthread_shutdown_complete;
+	bool& m_thread_started;
 	bool m_shutdown_signalled;
 	static constexpr chrono::duration m_loopwait = chrono::milliseconds(5);
     fmsmoov::ProcessorLiveData pb_live;
     MainWindow* m_main_window;
+    zmqpp::context_t context;
 };
 
 #endif /* COMMTHREAD_H_ */

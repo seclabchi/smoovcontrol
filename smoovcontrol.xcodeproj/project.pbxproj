@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9D2FAE1128E3EEC700E1A3E1 /* fmsmoov.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FAE0F28E3EEC700E1A3E1 /* fmsmoov.pb.cc */; };
+		9D2FAE1528E3FAF800E1A3E1 /* Commander.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FAE1328E3FAF800E1A3E1 /* Commander.cpp */; };
+		9D2FAE1828E3FDA900E1A3E1 /* Subscriber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FAE1728E3FDA900E1A3E1 /* Subscriber.cpp */; };
 		9D4B81C628D6395900F2264F /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4B81C428D6395900F2264F /* libfmt.a */; };
-		9D4B81CF28D63A7800F2264F /* CommThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B81C828D63A7700F2264F /* CommThread.cpp */; };
 		9D4B81D028D63A7800F2264F /* StereoMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B81C928D63A7700F2264F /* StereoMeter.cpp */; };
 		9D4B81D128D63A7800F2264F /* smoovcontrol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B81CB28D63A7800F2264F /* smoovcontrol.cpp */; };
 		9D4B81D228D63A7800F2264F /* MainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B81CC28D63A7800F2264F /* MainWindow.cpp */; };
@@ -33,13 +34,15 @@
 /* Begin PBXFileReference section */
 		9D2FAE0E28E3EEC700E1A3E1 /* fmsmoov.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmsmoov.pb.h; sourceTree = "<group>"; };
 		9D2FAE0F28E3EEC700E1A3E1 /* fmsmoov.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fmsmoov.pb.cc; sourceTree = "<group>"; };
+		9D2FAE1328E3FAF800E1A3E1 /* Commander.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Commander.cpp; sourceTree = "<group>"; };
+		9D2FAE1428E3FAF800E1A3E1 /* Commander.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Commander.hpp; sourceTree = "<group>"; };
+		9D2FAE1628E3FDA900E1A3E1 /* Subscriber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subscriber.h; sourceTree = "<group>"; };
+		9D2FAE1728E3FDA900E1A3E1 /* Subscriber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Subscriber.cpp; sourceTree = "<group>"; };
 		9D4B81AC28D6375000F2264F /* smoovcontrol */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = smoovcontrol; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D4B81C328D6395900F2264F /* libfltk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfltk.a; path = ../../../usr/local/lib/libfltk.a; sourceTree = "<group>"; };
 		9D4B81C428D6395900F2264F /* libfmt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmt.a; path = ../../../usr/local/Cellar/fmt/9.1.0/lib/libfmt.a; sourceTree = "<group>"; };
 		9D4B81C728D63A7700F2264F /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
-		9D4B81C828D63A7700F2264F /* CommThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommThread.cpp; sourceTree = "<group>"; };
 		9D4B81C928D63A7700F2264F /* StereoMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoMeter.cpp; sourceTree = "<group>"; };
-		9D4B81CA28D63A7800F2264F /* CommThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommThread.h; sourceTree = "<group>"; };
 		9D4B81CB28D63A7800F2264F /* smoovcontrol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = smoovcontrol.cpp; sourceTree = "<group>"; };
 		9D4B81CC28D63A7800F2264F /* MainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainWindow.cpp; sourceTree = "<group>"; };
 		9D4B81CD28D63A7800F2264F /* StereoMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoMeter.h; sourceTree = "<group>"; };
@@ -95,15 +98,17 @@
 		9D4B81AE28D6375000F2264F /* smoovcontrol */ = {
 			isa = PBXGroup;
 			children = (
+				9D2FAE1728E3FDA900E1A3E1 /* Subscriber.cpp */,
+				9D2FAE1628E3FDA900E1A3E1 /* Subscriber.h */,
 				9D4B81CE28D63A7800F2264F /* common_defs.h */,
-				9D4B81C828D63A7700F2264F /* CommThread.cpp */,
-				9D4B81CA28D63A7800F2264F /* CommThread.h */,
 				9D4B81CC28D63A7800F2264F /* MainWindow.cpp */,
 				9D4B81C728D63A7700F2264F /* MainWindow.h */,
 				9D4B81CB28D63A7800F2264F /* smoovcontrol.cpp */,
 				9D4B81C928D63A7700F2264F /* StereoMeter.cpp */,
 				9D4B81CD28D63A7800F2264F /* StereoMeter.h */,
 				9D4B81D728D65F3A00F2264F /* log_sink.h */,
+				9D2FAE1328E3FAF800E1A3E1 /* Commander.cpp */,
+				9D2FAE1428E3FAF800E1A3E1 /* Commander.hpp */,
 			);
 			path = smoovcontrol;
 			sourceTree = "<group>";
@@ -178,7 +183,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D4B81D228D63A7800F2264F /* MainWindow.cpp in Sources */,
-				9D4B81CF28D63A7800F2264F /* CommThread.cpp in Sources */,
+				9D2FAE1828E3FDA900E1A3E1 /* Subscriber.cpp in Sources */,
+				9D2FAE1528E3FAF800E1A3E1 /* Commander.cpp in Sources */,
 				9D2FAE1128E3EEC700E1A3E1 /* fmsmoov.pb.cc in Sources */,
 				9D4B81D128D63A7800F2264F /* smoovcontrol.cpp in Sources */,
 				9D4B81D028D63A7800F2264F /* StereoMeter.cpp in Sources */,

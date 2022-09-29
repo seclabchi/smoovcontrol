@@ -25,7 +25,8 @@ using log_sink_st = log_sink<spdlog::details::null_mutex>;
 
 
 #include "MainWindow.h"
-#include "CommThread.h"
+#include "Subscriber.h"
+#include "Commander.hpp"
 
 using namespace std;
 
@@ -114,27 +115,44 @@ int main(int argc, char* argv[]) {
 
 	MainWindow* mw = new MainWindow();
 
-	std::mutex mutex_startup;
-	std::condition_variable cv_startup;
-	std::unique_lock lk(mutex_startup);
-	bool commthread_started = false;
+	std::mutex mutex_commander_startup;
+	std::condition_variable cv_commander_startup;
+	std::unique_lock lk_cmd(mutex_commander_startup);
+	bool commander_started = false;
 
-	CommThread* comm_thread = new CommThread(mutex_startup, cv_startup, commthread_started);
+    LOGD("Starting Commander...");
+	Commander* commander = new Commander(mutex_commander_startup, cv_commander_startup, commander_started);
+	// Start thread for 0mq/protobuf commands
+	std::thread* cmd_thread = new std::thread(std::ref(*commander), "1234");
+	LOGD("Waiting for startup confirmation from Commander...");
+	cv_commander_startup.wait(lk_cmd, [&]{return commander_started;}); // @suppress("Invalid arguments")
 
-	// Start thread for 0mq/protobuf handler
-	std::thread* cmd_thread = new std::thread(std::ref(*comm_thread), "1234");
-	LOGD("Waiting for startup confirmation from CommThread...");
-	cv_startup.wait(lk, [&]{return commthread_started;}); // @suppress("Invalid arguments")
-
-    comm_thread->set_main_window(mw);
-    mw->set_comm_thread(comm_thread);
+    std::mutex mutex_subscriber_startup;
+    std::condition_variable cv_subscriber_startup;
+    std::unique_lock lk_sub(mutex_subscriber_startup);
+    bool subscriber_started = false;
+    
+    LOGD("Starting Subscriber...");
+    Subscriber* subscriber = new Subscriber(mutex_subscriber_startup, cv_subscriber_startup, subscriber_started);
+    // Start thread for 0mq/protobuf subscription
+    std::thread* sub_thread = new std::thread(std::ref(*subscriber), "1234");
+    LOGD("Waiting for startup confirmation from Subscriber...");
+    cv_subscriber_startup.wait(lk_sub, [&]{return subscriber_started;}); // @suppress("Invalid arguments")
+    
+    commander->set_main_window(mw);
+    subscriber->set_main_window(mw);
+    mw->set_commander(commander);
+    mw->set_subscriber(subscriber);
     
 	LOGI("Starting UI");
 	mw->go(argc, argv);
     LOGI("UI closed.");
-	comm_thread->stop();
-    LOGD("Stopping comm thread and waiting to join...");
+    LOGD("Stopping commander thread and waiting to join...");
+    commander->stop();
     cmd_thread->join();
+    LOGD("Stopping subscriber thread and waiting to join...");
+    subscriber->stop();
+    sub_thread->join();
     LOGI("All shut down.  Goodbye.");
     osx_latencycritical_end();   
 	return 0;
