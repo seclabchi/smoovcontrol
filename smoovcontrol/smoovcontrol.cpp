@@ -114,45 +114,9 @@ int main(int argc, char* argv[]) {
 	LOGI("Starting smoovcontrol...");
 
 	MainWindow* mw = new MainWindow();
-
-	std::mutex mutex_commander_startup;
-	std::condition_variable cv_commander_startup;
-	std::unique_lock lk_cmd(mutex_commander_startup);
-	bool commander_started = false;
-
-    LOGD("Starting Commander...");
-	Commander* commander = new Commander(mutex_commander_startup, cv_commander_startup, commander_started);
-	// Start thread for 0mq/protobuf commands
-	std::thread* cmd_thread = new std::thread(std::ref(*commander), "1234");
-	LOGD("Waiting for startup confirmation from Commander...");
-	cv_commander_startup.wait(lk_cmd, [&]{return commander_started;}); // @suppress("Invalid arguments")
-
-    std::mutex mutex_subscriber_startup;
-    std::condition_variable cv_subscriber_startup;
-    std::unique_lock lk_sub(mutex_subscriber_startup);
-    bool subscriber_started = false;
-    
-    LOGD("Starting Subscriber...");
-    Subscriber* subscriber = new Subscriber(mutex_subscriber_startup, cv_subscriber_startup, subscriber_started);
-    // Start thread for 0mq/protobuf subscription
-    std::thread* sub_thread = new std::thread(std::ref(*subscriber), "1234");
-    LOGD("Waiting for startup confirmation from Subscriber...");
-    cv_subscriber_startup.wait(lk_sub, [&]{return subscriber_started;}); // @suppress("Invalid arguments")
-    
-    commander->set_main_window(mw);
-    subscriber->set_main_window(mw);
-    mw->set_commander(commander);
-    mw->set_subscriber(subscriber);
-    
-	LOGI("Starting UI");
-	mw->go(argc, argv);
+    LOGI("Starting UI");
+    mw->go(argc, argv);
     LOGI("UI closed.");
-    LOGD("Stopping commander thread and waiting to join...");
-    commander->stop();
-    cmd_thread->join();
-    LOGD("Stopping subscriber thread and waiting to join...");
-    subscriber->stop();
-    sub_thread->join();
     LOGI("All shut down.  Goodbye.");
     osx_latencycritical_end();   
 	return 0;

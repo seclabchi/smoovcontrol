@@ -8,6 +8,7 @@
 #include "Subscriber.h"
 
 #include <string>
+#include <sstream>
 #include <mutex>
 #include <chrono>
 #include <condition_variable>
@@ -18,12 +19,12 @@
 
 #include "MainWindow.h"
 
-Subscriber::Subscriber(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _thread_started) :
-	mutex_startup(_mutex_startup), cv_startup(_cv_startup), m_thread_started(_thread_started) {
+Subscriber::Subscriber(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _thread_started, string _ipaddr) :
+	mutex_startup(_mutex_startup), cv_startup(_cv_startup), m_thread_started(_thread_started), m_ipaddr(_ipaddr) {
 	// TODO Auto-generated constructor stub
 	log = spdlog::stdout_color_mt("SUBSCRIBER");
 	log->set_pattern("%^[%H%M%S.%e][%s:%#][%n][%l] %v%$");
-	log->set_level(spdlog::level::trace);
+	log->set_level(spdlog::level::debug);
     m_shutdown_signalled = false;
 }
 
@@ -62,7 +63,9 @@ void Subscriber::operator ()(string params) {
     zmqpp::socket_t socket_shutdown(context, zmqpp::socket_type::reply);
     socket_shutdown.bind("inproc://subscriber_shutdown");
     zmqpp::socket socket_sub(context, zmqpp::socket_type::subscribe);
-    socket_sub.connect("tcp://rpi-fmsmoov:5555");
+    stringstream constr;
+    constr << "tcp://" << m_ipaddr << ":5555";
+    socket_sub.connect(constr.str().c_str());
     cout << "Connected to publisher." << endl;
     //# Initialize poll set
     socket_sub.subscribe("");

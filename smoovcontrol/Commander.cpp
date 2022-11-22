@@ -8,12 +8,14 @@
 #include "Commander.hpp"
 #include "MainWindow.h"
 
-Commander::Commander(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _thread_started) :
-    mutex_startup(_mutex_startup), cv_startup(_cv_startup), m_thread_started(_thread_started) {
+#include <sstream>
+
+Commander::Commander(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _thread_started, string _ipaddr) :
+    mutex_startup(_mutex_startup), cv_startup(_cv_startup), m_thread_started(_thread_started), m_ipaddr(_ipaddr) {
     // TODO Auto-generated constructor stub
     log = spdlog::stdout_color_mt("COMMANDER");
     log->set_pattern("%^[%H%M%S.%e][%s:%#][%n][%l] %v%$");
-    log->set_level(spdlog::level::trace);
+    log->set_level(spdlog::level::debug);
     m_shutdown_signalled = false;
 }
 
@@ -60,7 +62,9 @@ void Commander::operator ()(string params) {
     LOGD("Commander in main polling loop...waiting for shutdown signal...");
     zmqpp::context_t context;
     zmqpp::socket_t socket_cmd(context, zmqpp::socket_type::request);
-    socket_cmd.connect("tcp://rpi-fmsmoov:5556");
+    stringstream constr;
+    constr << "tcp://" << m_ipaddr << ":5556";
+    socket_cmd.connect(constr.str().c_str());
     cout << "Connected to responder." << endl;
     
     while(false == m_shutdown_signalled) {
@@ -71,7 +75,7 @@ void Commander::operator ()(string params) {
         fmsmoov::ProcessorCommand cmd_to_q;
         cmd_to_q.CopyFrom(m_cmd_queue.front());
         m_cmd_queue.pop();
-        LOGD("Popped command from queue...");
+        LOGT("Popped command from queue...");
         zmqpp::message_t msg(cmd_to_q.SerializeAsString());
         socket_cmd.send(msg);
         LOGT("Message sent.");

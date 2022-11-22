@@ -30,13 +30,14 @@ using namespace std;
 
 class Commander {
 public:
-    Commander(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _thread_started);
+    Commander(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _thread_started, string _ipaddr);
     virtual ~Commander();
     void operator ()(string params);
     void stop();
     void set_main_window(MainWindow* mw);
     void enqueue_command(const fmsmoov::ProcessorCommand& cmd);
 private:
+    string m_ipaddr;
     std::shared_ptr<spdlog::logger> log;
     std::mutex mutex_shutdown;
     std::mutex& mutex_startup;

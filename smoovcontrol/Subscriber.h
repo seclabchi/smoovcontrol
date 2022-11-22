@@ -26,13 +26,14 @@ using namespace std;
 
 class Subscriber {
 public:
-    Subscriber(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _commthread_started);
+    Subscriber(std::mutex& _mutex_startup, std::condition_variable& _cv_startup, bool& _commthread_started, string _ipaddr);
 	virtual ~Subscriber();
 	void operator ()(string params);
 	void stop();
     void set_main_window(MainWindow* mw);
     void send_command(const fmsmoov::ProcessorCommand);
 private:
+    string m_ipaddr;
 	std::shared_ptr<spdlog::logger> log;
 	std::mutex mutex_shutdown;
 	std::mutex& mutex_startup;

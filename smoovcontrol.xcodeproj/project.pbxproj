@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D1E8F6D28E6AFDC009043AD /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D1E8F6B28E6AFDC009043AD /* Meter.cpp */; };
+		9D1E8F7028E6B5A6009043AD /* Slidepot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D1E8F6E28E6B5A6009043AD /* Slidepot.cpp */; };
 		9D2FAE1128E3EEC700E1A3E1 /* fmsmoov.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FAE0F28E3EEC700E1A3E1 /* fmsmoov.pb.cc */; };
 		9D2FAE1528E3FAF800E1A3E1 /* Commander.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FAE1328E3FAF800E1A3E1 /* Commander.cpp */; };
 		9D2FAE1828E3FDA900E1A3E1 /* Subscriber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FAE1728E3FDA900E1A3E1 /* Subscriber.cpp */; };
@@ -17,6 +19,10 @@
 		9D4B81D428D64D6500F2264F /* libzmqpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4B81D328D64D6500F2264F /* libzmqpp.a */; };
 		9D4B81D628D64D7B00F2264F /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4B81D528D64D7B00F2264F /* libzmq.a */; };
 		9D4B81DE28D6F0BC00F2264F /* libprotobuf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4B81DD28D6F0BC00F2264F /* libprotobuf.a */; };
+		9D546BC328EE0F150051BAFC /* Indicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D546BC128EE0F150051BAFC /* Indicator.cpp */; };
+		9D546BC628EE3CB20051BAFC /* MeterDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D546BC428EE3CB20051BAFC /* MeterDisplay.cpp */; };
+		9DE25A4F290C336800667181 /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DE25A4D290C336800667181 /* CompressorLimiter.cpp */; };
+		9DE25A52290DD58F00667181 /* adjuster_delay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DE25A50290DD58F00667181 /* adjuster_delay.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +38,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D1E8F6B28E6AFDC009043AD /* Meter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
+		9D1E8F6C28E6AFDC009043AD /* Meter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Meter.hpp; sourceTree = "<group>"; };
+		9D1E8F6E28E6B5A6009043AD /* Slidepot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Slidepot.cpp; sourceTree = "<group>"; };
+		9D1E8F6F28E6B5A6009043AD /* Slidepot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Slidepot.hpp; sourceTree = "<group>"; };
 		9D2FAE0E28E3EEC700E1A3E1 /* fmsmoov.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmsmoov.pb.h; sourceTree = "<group>"; };
 		9D2FAE0F28E3EEC700E1A3E1 /* fmsmoov.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fmsmoov.pb.cc; sourceTree = "<group>"; };
 		9D2FAE1328E3FAF800E1A3E1 /* Commander.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Commander.cpp; sourceTree = "<group>"; };
@@ -51,6 +61,14 @@
 		9D4B81D528D64D7B00F2264F /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = ../../../usr/local/Cellar/zeromq/4.3.4/lib/libzmq.a; sourceTree = "<group>"; };
 		9D4B81D728D65F3A00F2264F /* log_sink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log_sink.h; sourceTree = "<group>"; };
 		9D4B81DD28D6F0BC00F2264F /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf.a; path = ../../../usr/local/lib/libprotobuf.a; sourceTree = "<group>"; };
+		9D546BC128EE0F150051BAFC /* Indicator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Indicator.cpp; sourceTree = "<group>"; };
+		9D546BC228EE0F150051BAFC /* Indicator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Indicator.hpp; sourceTree = "<group>"; };
+		9D546BC428EE3CB20051BAFC /* MeterDisplay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeterDisplay.cpp; sourceTree = "<group>"; };
+		9D546BC528EE3CB20051BAFC /* MeterDisplay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeterDisplay.hpp; sourceTree = "<group>"; };
+		9DE25A4D290C336800667181 /* CompressorLimiter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorLimiter.cpp; sourceTree = "<group>"; };
+		9DE25A4E290C336800667181 /* CompressorLimiter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CompressorLimiter.hpp; sourceTree = "<group>"; };
+		9DE25A50290DD58F00667181 /* adjuster_delay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = adjuster_delay.cpp; sourceTree = "<group>"; };
+		9DE25A51290DD58F00667181 /* adjuster_delay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = adjuster_delay.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +116,8 @@
 		9D4B81AE28D6375000F2264F /* smoovcontrol */ = {
 			isa = PBXGroup;
 			children = (
+				9DE25A50290DD58F00667181 /* adjuster_delay.cpp */,
+				9DE25A51290DD58F00667181 /* adjuster_delay.hpp */,
 				9D2FAE1728E3FDA900E1A3E1 /* Subscriber.cpp */,
 				9D2FAE1628E3FDA900E1A3E1 /* Subscriber.h */,
 				9D4B81CE28D63A7800F2264F /* common_defs.h */,
@@ -109,6 +129,16 @@
 				9D4B81D728D65F3A00F2264F /* log_sink.h */,
 				9D2FAE1328E3FAF800E1A3E1 /* Commander.cpp */,
 				9D2FAE1428E3FAF800E1A3E1 /* Commander.hpp */,
+				9D1E8F6B28E6AFDC009043AD /* Meter.cpp */,
+				9D1E8F6C28E6AFDC009043AD /* Meter.hpp */,
+				9DE25A4D290C336800667181 /* CompressorLimiter.cpp */,
+				9DE25A4E290C336800667181 /* CompressorLimiter.hpp */,
+				9D1E8F6E28E6B5A6009043AD /* Slidepot.cpp */,
+				9D1E8F6F28E6B5A6009043AD /* Slidepot.hpp */,
+				9D546BC128EE0F150051BAFC /* Indicator.cpp */,
+				9D546BC228EE0F150051BAFC /* Indicator.hpp */,
+				9D546BC428EE3CB20051BAFC /* MeterDisplay.cpp */,
+				9D546BC528EE3CB20051BAFC /* MeterDisplay.hpp */,
 			);
 			path = smoovcontrol;
 			sourceTree = "<group>";
@@ -182,11 +212,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D546BC328EE0F150051BAFC /* Indicator.cpp in Sources */,
+				9D1E8F6D28E6AFDC009043AD /* Meter.cpp in Sources */,
+				9D1E8F7028E6B5A6009043AD /* Slidepot.cpp in Sources */,
 				9D4B81D228D63A7800F2264F /* MainWindow.cpp in Sources */,
 				9D2FAE1828E3FDA900E1A3E1 /* Subscriber.cpp in Sources */,
 				9D2FAE1528E3FAF800E1A3E1 /* Commander.cpp in Sources */,
 				9D2FAE1128E3EEC700E1A3E1 /* fmsmoov.pb.cc in Sources */,
+				9DE25A52290DD58F00667181 /* adjuster_delay.cpp in Sources */,
+				9DE25A4F290C336800667181 /* CompressorLimiter.cpp in Sources */,
 				9D4B81D128D63A7800F2264F /* smoovcontrol.cpp in Sources */,
+				9D546BC628EE3CB20051BAFC /* MeterDisplay.cpp in Sources */,
 				9D4B81D028D63A7800F2264F /* StereoMeter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
